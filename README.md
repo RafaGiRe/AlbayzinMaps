@@ -1,0 +1,1 @@
+Android app developed using AndroidStudio as a student project for the University, which you can use for visiting the most famous places in Albayzin (Granada, Spain). Currently, it uses a local SQLite database, and its content is not too large.
