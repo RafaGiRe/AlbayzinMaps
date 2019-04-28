@@ -1,0 +1,125 @@
+<resources>
+    <string name="app_name">AlbayzinMaps</string>
+
+    <!-- __________Menus__________________ -->
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Albayzin Maps</string>
+    <string name="nav_header_subtitle">https://github.com/rafagire</string>
+    <string name="nav_title_search">Nueva búsqueda</string>
+    <string name="nav_subtitle_searchbyname">Búsqueda por nombre</string>
+    <string name="nav_title_map">Sitios pendientes</string>
+    <string name="nav_title_favourites">Mis sitios</string>
+    <string name="nav_title_profile">Perfil</string>
+
+    <string name="action_settings">Configuración</string>
+
+
+    <!-- ___________________Settings__________________ -->
+    <string name="title_activity_settings">Configuración</string>
+
+
+    <string name="first_access_key">com.rafagire.albayzinmaps.first_access</string>
+    <string name="own_sites_key">com.rafagire.albayzinmaps.own_sites</string>
+    <string name="favourite_sites_key">com.rafagire.albayzinmaps.favourite_sites</string>
+    <string name="pending_sites_key">com.rafagire.albayzinmaps.pending_sites</string>
+    <string name="visited_sites_key">com.rafagire.albayzinmaps.visited_sites</string>
+
+
+    <string name="pref_header_general">General</string>
+    <string name="pref_idiom_key">com.rafagire.albayzinmaps.idiom_list</string>
+    <string name="pref_idiom_title">Idioma</string>
+    <string-array name="pref_idiom_titles">
+        <item>Spanish</item>
+        <item>English</item>
+    </string-array>
+    <string-array name="pref_idiom_values">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+
+    <string name="pref_header_database">Base de datos</string>
+    <string name="pref_database_restore_key">com.rafagire.albayzinmaps.restore_database_values</string>
+    <string name="pref_database_add_title">Añadir nueva entrada</string>
+    <string name="pref_database_update_title">Actualizar entradas manualmente</string>
+    <string name="pref_database_restore_title">Restaurar base de datos</string>
+    <string name="pref_database_restore_summ">Elimina los sitios favoritos y añadidos</string>
+
+
+    <!-- _______________________Search Fragment_______________________ -->
+
+    <string name="tView_search_byName">Búsqueda por nombre: </string>
+    <string name="eText_search_byName">Nombre</string>
+    <string name="button_search">Buscar</string>
+    <string name="checkBox_search_f1">Miradores</string>
+    <string name="checkBox_search_f2">Iglesias</string>
+    <string name="checkBox_search_f3">Mezquitas</string>
+    <string name="checkBox_search_f4">Monumentos</string>
+    <string name="checkBox_search_f5">Zambras</string>
+    <string name="checkBox_search_f6">Restaurantes</string>
+    <string name="checkBox_search_f7">Fuentes</string>
+    <string name="tView_search_and_or">Coincidencias con: </string>
+    <string name="rButton_search_or">Cualquier filtro</string>
+    <string name="rButton_search_and">Todos los filtros</string>
+
+
+    <!-- _______________________Profile Fragment_______________________ -->
+
+    <string name="tView_profile_visited_sites">Sitios visitados: </string>
+    <string name="tView_profile_own_sites">Sitios añadidos: </string>
+    <string name="tView_profile_most_visited_categorys">Categoría más visitada: </string>
+    <string name="button_profile_add">Añadir sitio</string>
+
+
+    <!-- _______________________Search Activity_______________________ -->
+
+    <string name="title_activity_search">Búsqueda</string>
+    <string name="title_activity_search_fromUpdate">Todos los sitios</string>
+    <string name="title_activity_search_fromFav">Mis Sitios</string>
+    <string name="title_activity_search_fromPend">Sitios Pendientes</string>
+    <string name="tView_search_no_sites">Ningún resultado disponible.</string>
+
+
+    <!-- _______________________ShowSite Activity_______________________ -->
+
+    <string name="title_activity_showSite">Sitio</string>
+    <string name="tView_showSite_no_description">Descripción no disponible.</string>
+    <string name="toast_showSite_addFav">Añadido correctamente a Mis Sitios</string>
+    <string name="toast_showSite_addPend">Añadido correctamente a Sitios Pendientes</string>
+    <string name="button_showSite_showInMap">Mostrar en mapa</string>
+    <string name="button_showSite_visited">¡Visitado!</string>
+    <string name="toast_showSite_addVisited">Añadido correctamente a visitados</string>
+
+
+    <!-- _______________________Map Activity_______________________ -->
+
+    <string name="title_activity_maps">Map</string>
+    <string name="marker_map">Nuevo sitio</string>
+    <string name="button_map_select">Seleccionar</string>
+    <string name="button_map_open_GoogleMaps">Abrir en GoogleMaps</string>
+    <string name="toast_map_no_marker">Debe seleccionar un punto haciendo un click largo</string>
+
+
+    <!-- _______________________AddSite Activity (also used for Update)_______________________ -->
+    <string name="title_activity_addSite">Añadir nuevo sitio</string>
+    <string name="title_activity_updateSite">Actualizar sitio</string>
+    <string name="tView_addSite_infoAdd">Introduzca los datos del sitio</string>
+    <string name="tView_addSite_infoUpdate">Actualice los datos del sitio</string>
+    <string name="tView_addSite_name">Nombre: </string>
+    <string name="eText_addSite_name">Introduzca un nombre</string>
+    <string name="tView_addSite_description">Descripción: </string>
+    <string name="eText_addSite_description">Describa brevemente el sitio</string>
+    <string name="checkBox_addSite_f1">Mirador</string>
+    <string name="checkBox_addSite_f2">Iglesia</string>
+    <string name="checkBox_addSite_f3">Mezquita</string>
+    <string name="checkBox_addSite_f4">Monumento</string>
+    <string name="checkBox_addSite_f5">Zambra</string>
+    <string name="checkBox_addSite_f6">Restaurante</string>
+    <string name="checkBox_addSite_f7">Fuente</string>
+    <string name="button_addSite_add">Añadir</string>
+    <string name="button_addSite_update">Actualizar</string>
+    <string name="toast_addSite_no_name">Debe introducir un nombre</string>
+    <string name="toast_addSite_added">Sitio añadido correctamente</string>
+    <string name="toast_addSite_updated">Sitio actualizado correctamente</string>
+
+</resources>

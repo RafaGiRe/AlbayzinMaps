@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_alignParentBottom="true"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentRight="true"
+    android:layout_alignParentTop="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingTop="48dp"
+        tools:context=".SearchFragment">
+
+         <RelativeLayout
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:orientation="horizontal">
+             <TextView
+                 android:id="@+id/tView_showSite_name"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_alignParentTop="true"
+                 android:layout_alignParentLeft="true"
+                 android:layout_toLeftOf="@+id/linearLayout_showSite"
+                 android:padding="16dp"
+                 android:textAppearance="?android:textAppearanceLarge" />
+
+             <LinearLayout
+                 android:id="@+id/linearLayout_showSite"
+                 android:layout_width="wrap_content"
+                 android:layout_height="match_parent"
+                 android:layout_alignParentRight="true"
+                 android:layout_alignParentTop="true"
+                 android:orientation="vertical">
+                 <ImageButton
+                     android:id="@+id/iButton_showSite_fav"
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     app:srcCompat="@drawable/ic_menu_favourites"/>
+                 <ImageButton
+                     android:id="@+id/iButton_showSite_pend"
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     app:srcCompat="@drawable/ic_menu_map"/>
+             </LinearLayout>
+         </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tView_showSite_categorys"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:textAppearance="?android:textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/tView_showSite_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/button_showSite_showInMap"
+                android:padding="16dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/button_showSite_showInMap"/>
+
+            <Button
+                android:id="@+id/button_showSite_visited"
+                android:padding="16dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/button_showSite_visited"/>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</ScrollView>

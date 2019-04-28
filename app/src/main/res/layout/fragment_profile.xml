@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingTop="48dp"
+    tools:context=".ProfileFragment">
+
+
+    <TextView
+        android:id="@+id/tView_profile_n_sites"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:text="@string/tView_profile_visited_sites" />
+
+    <TextView
+        android:id="@+id/tView_profile_categorys"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:text="@string/tView_profile_most_visited_categorys" />
+
+    <TextView
+        android:id="@+id/tView_profile_n_own_sites"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:text="@string/tView_profile_own_sites" />
+
+
+    <Button
+        android:id="@+id/button_profile_add"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:text="@string/button_profile_add" />
+
+
+</LinearLayout>

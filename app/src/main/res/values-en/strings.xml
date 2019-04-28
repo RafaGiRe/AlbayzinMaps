@@ -1,0 +1,125 @@
+<resources>
+    <string name="app_name">AlbayzinMaps</string>
+
+    <!-- __________Menus__________________ -->
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Albayzin Maps</string>
+    <string name="nav_header_subtitle">https://github.com/rafagire</string>
+    <string name="nav_title_search">New search</string>
+    <string name="nav_subtitle_searchbyname">Search by name</string>
+    <string name="nav_title_map">Pending sites</string>
+    <string name="nav_title_favourites">My sites</string>
+    <string name="nav_title_profile">Profile</string>
+
+    <string name="action_settings">Settings</string>
+
+
+    <!-- ___________________Settings__________________ -->
+    <string name="title_activity_settings">Settings</string>
+
+
+    <string name="first_access_key">com.rafagire.albayzinmaps.first_access</string>
+    <string name="own_sites_key">com.rafagire.albayzinmaps.own_sites</string>
+    <string name="favourite_sites_key">com.rafagire.albayzinmaps.favourite_sites</string>
+    <string name="pending_sites_key">com.rafagire.albayzinmaps.pending_sites</string>
+    <string name="visited_sites_key">com.rafagire.albayzinmaps.visited_sites</string>
+
+
+    <string name="pref_header_general">General</string>
+    <string name="pref_idiom_key">com.rafagire.albayzinmaps.idiom_list</string>
+    <string name="pref_idiom_title">Idiom</string>
+    <string-array name="pref_idiom_titles">
+        <item>Spanish</item>
+        <item>English</item>
+    </string-array>
+    <string-array name="pref_idiom_values">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+
+    <string name="pref_header_database">Database</string>
+    <string name="pref_database_restore_key">com.rafagire.albayzinmaps.restore_database_values</string>
+    <string name="pref_database_add_title">Add new entry</string>
+    <string name="pref_database_update_title">Actualize entrys</string>
+    <string name="pref_database_restore_title">Restore database</string>
+    <string name="pref_database_restore_summ">Remove favourite and added sites</string>
+
+
+    <!-- _______________________Search Fragment_______________________ -->
+
+    <string name="tView_search_byName">Search by name: </string>
+    <string name="eText_search_byName">Name</string>
+    <string name="button_search">Search</string>
+    <string name="checkBox_search_f1">Viewpoints</string>
+    <string name="checkBox_search_f2">Churches</string>
+    <string name="checkBox_search_f3">Mosques</string>
+    <string name="checkBox_search_f4">Monuments</string>
+    <string name="checkBox_search_f5">Zambras</string>
+    <string name="checkBox_search_f6">Restaurants</string>
+    <string name="checkBox_search_f7">Fountains</string>
+    <string name="tView_search_and_or">Matches with: </string>
+    <string name="rButton_search_or">Any filter</string>
+    <string name="rButton_search_and">All filters</string>
+
+
+    <!-- _______________________Profile Fragment_______________________ -->
+
+    <string name="tView_profile_visited_sites">Visited sites: </string>
+    <string name="tView_profile_own_sites">Added sites: </string>
+    <string name="tView_profile_most_visited_categorys">Most visited category: </string>
+    <string name="button_profile_add">Add site</string>
+
+
+    <!-- _______________________Search Activity_______________________ -->
+
+    <string name="title_activity_search">Search</string>
+    <string name="title_activity_search_fromUpdate">All sites</string>
+    <string name="title_activity_search_fromFav">My Sites</string>
+    <string name="title_activity_search_fromPend">Pending Sites</string>
+    <string name="tView_search_no_sites">No results available.</string>
+
+
+    <!-- _______________________ShowSite Activity_______________________ -->
+
+    <string name="title_activity_showSite">Site</string>
+    <string name="tView_showSite_no_description">Description no available.</string>
+    <string name="toast_showSite_addFav">Correctly added to My Sites</string>
+    <string name="toast_showSite_addPend">Correctly added to Pending Sites</string>
+    <string name="button_showSite_showInMap">Show on map</string>
+    <string name="button_showSite_visited">Visited!</string>
+    <string name="toast_showSite_addVisited">Correctly added to visited sites</string>
+
+
+    <!-- _______________________Map Activity_______________________ -->
+
+    <string name="title_activity_maps">Map</string>
+    <string name="marker_map">New site</string>
+    <string name="button_map_select">Select</string>
+    <string name="button_map_open_GoogleMaps">Open in GoogleMaps</string>
+    <string name="toast_map_no_marker">Must select a point doing a long click</string>
+
+
+    <!-- _______________________AddSite Activity (also used for Update)_______________________ -->
+    <string name="title_activity_addSite">Add new site</string>
+    <string name="title_activity_updateSite">Actualize site</string>
+    <string name="tView_addSite_infoAdd">Introduce data for new site</string>
+    <string name="tView_addSite_infoUpdate">Actualize data site</string>
+    <string name="tView_addSite_name">Name: </string>
+    <string name="eText_addSite_name">Enter a name</string>
+    <string name="tView_addSite_description">Description: </string>
+    <string name="eText_addSite_description">Enter a little description</string>
+    <string name="checkBox_addSite_f1">Viewpoint</string>
+    <string name="checkBox_addSite_f2">Church</string>
+    <string name="checkBox_addSite_f3">Mosque</string>
+    <string name="checkBox_addSite_f4">Monument</string>
+    <string name="checkBox_addSite_f5">Zambra</string>
+    <string name="checkBox_addSite_f6">Restaurant</string>
+    <string name="checkBox_addSite_f7">Fountain</string>
+    <string name="button_addSite_add">Add</string>
+    <string name="button_addSite_update">Actualize</string>
+    <string name="toast_addSite_no_name">Must enter a name</string>
+    <string name="toast_addSite_added">Site added correctly</string>
+    <string name="toast_addSite_updated">Site actualized correctly</string>
+
+</resources>

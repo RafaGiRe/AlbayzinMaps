@@ -1,0 +1,30 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <Preference android:title="@string/pref_database_add_title">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="com.tutorial.rafagire.albayzinmaps"
+            android:targetClass="com.tutorial.rafagire.albayzinmaps.MapsActivity" >
+        </intent>
+    </Preference>
+
+    <Preference android:title="@string/pref_database_update_title">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="com.tutorial.rafagire.albayzinmaps"
+            android:targetClass="com.tutorial.rafagire.albayzinmaps.SearchActivity" >
+            <extra
+                android:name="fromUpdate"
+                android:value="true" />
+
+        </intent>
+    </Preference>
+
+    <SwitchPreference
+        android:defaultValue="true"
+        android:key="@string/pref_database_restore_key"
+        android:summary="@string/pref_database_restore_summ"
+        android:title="@string/pref_database_restore_title" />
+
+</PreferenceScreen>

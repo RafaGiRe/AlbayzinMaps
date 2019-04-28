@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/relativeLayout">
+
+    <TextView
+        android:id="@+id/tView_nameSite"
+        android:padding="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_toLeftOf="@+id/iView_Favourite"
+        android:textAppearance="?android:attr/textAppearanceListItem" />
+
+    <TextView
+        android:id="@+id/tView_categorys"
+        android:padding="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tView_nameSite"
+        android:layout_alignLeft="@+id/tView_nameSite"
+        android:layout_toLeftOf="@+id/iView_Favourite" />
+
+    <ImageView
+        android:id="@+id/iView_Favourite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingRight="6dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/tView_nameSite"
+        android:layout_alignParentTop="true"/>
+
+    <ImageView
+        android:id="@+id/iView_Pending"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingRight="6dp"
+        android:layout_alignRight="@+id/iView_Favourite"
+        android:layout_alignLeft="@+id/iView_Favourite"
+        android:layout_below="@+id/iView_Favourite" />
+
+</RelativeLayout>
