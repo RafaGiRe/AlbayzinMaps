@@ -1,6 +1,5 @@
 package com.tutorial.rafagire.albayzinmaps;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -10,6 +9,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -40,6 +40,7 @@ public class AddSiteActivity extends AppCompatActivity implements View.OnClickLi
     CheckBox checkBox_restaurant;
     CheckBox checkBox_fountain;
     Button button_addSite;
+    Button button_cancel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +63,7 @@ public class AddSiteActivity extends AppCompatActivity implements View.OnClickLi
         checkBox_restaurant = (CheckBox)findViewById(R.id.checkBox_addSite_f6);
         checkBox_fountain = (CheckBox)findViewById(R.id.checkBox_addSite_f7);
         button_addSite = (Button)findViewById(R.id.button_addSite);
-
+        button_cancel = (Button)findViewById(R.id.button_cancel);
 
         if(newSite) {
             setTitle(R.string.title_activity_addSite);
@@ -89,84 +90,90 @@ public class AddSiteActivity extends AppCompatActivity implements View.OnClickLi
         }
 
         button_addSite.setOnClickListener(this);
+        button_cancel.setOnClickListener(this);
 
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
     }
 
 
     @Override
     public void onClick(View v) {
-        String name = eText_name.getText().toString();
+        switch (v.getId()){
+            case R.id.button_addSite:
+                String name = eText_name.getText().toString();
 
-        if((name == null) || (name.equals(""))){
-            ShapeDrawable shape = new ShapeDrawable(new RectShape());
-            shape.getPaint().setColor(Color.RED);
-            shape.getPaint().setStyle(Paint.Style.STROKE);
-            shape.getPaint().setStrokeWidth(3);
+                if((name == null) || (name.equals(""))){
+                    ShapeDrawable shape = new ShapeDrawable(new RectShape());
+                    shape.getPaint().setColor(Color.RED);
+                    shape.getPaint().setStyle(Paint.Style.STROKE);
+                    shape.getPaint().setStrokeWidth(3);
 
-            eText_name.setBackground(shape);
-            Toast.makeText(this, getString(R.string.toast_addSite_no_name), Toast.LENGTH_SHORT).show();
-            return;
+                    eText_name.setBackground(shape);
+                    Toast.makeText(this, getString(R.string.toast_addSite_no_name), Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                Site site;
+                int id;
+                if(newSite) {
+                    id = 0;
+                    //Make sure the ID for the new site is not already used
+                    do {
+                        id++;
+                        site = dbAccess.findById(id);
+                    } while (site != null);
+                }
+                else{
+                    id = oldSite.id;
+                }
+                site = new Site();
+                site.id = id;
+                site.name = name;
+                site.description = eText_description.getText().toString();
+                site.viewpoint = checkBox_viewpoint.isChecked();
+                site.church = checkBox_church.isChecked();
+                site.mosque = checkBox_mosque.isChecked();
+                site.monument = checkBox_monument.isChecked();
+                site.zambra = checkBox_zambra.isChecked();
+                site.restaurant = checkBox_restaurant.isChecked();
+                site.fountain = checkBox_fountain.isChecked();
+                site.latitude = latLng.latitude;
+                site.longitude = latLng.longitude;
+
+                //Add the site to the database
+                if(newSite) {
+                    dbAccess.add(site);
+
+                    //Add the new site to "Own Sites" and "Favourite Sites"
+                    SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                    SharedPreferences.Editor editor = pref.edit();
+
+                    Set<String> setOwn = pref.getStringSet(getString(R.string.own_sites_key), new HashSet<String>());
+                    setOwn.add(Integer.toString(site.id));
+                    editor.putStringSet(getString(R.string.own_sites_key), setOwn);
+
+                    Set<String> setFavourite = pref.getStringSet(getString(R.string.favourite_sites_key), new HashSet<String>());
+                    setFavourite.add(Integer.toString(site.id));
+                    editor.putStringSet(getString(R.string.favourite_sites_key), setFavourite);
+
+                    editor.commit();
+
+                    Toast.makeText(this, getString(R.string.toast_addSite_added), Toast.LENGTH_SHORT).show();
+
+                }
+                else {
+                    dbAccess.update(site);
+                    Toast.makeText(this, getString(R.string.toast_addSite_updated), Toast.LENGTH_SHORT).show();
+                }
+
+                finish();
+                break;
+            case R.id.button_cancel:
+                finish();
+                break;
         }
 
-        Site site;
-        int id;
-        if(newSite) {
-            id = 0;
-            //Make sure the ID for the new site is not already used
-            do {
-                id++;
-                site = dbAccess.findById(id);
-            } while (site != null);
-        }
-        else{
-            id = oldSite.id;
-        }
 
-        site = new Site();
-        site.id = id;
-        site.name = name;
-        site.description = eText_description.getText().toString();
-        site.viewpoint = checkBox_viewpoint.isChecked();
-        site.church = checkBox_church.isChecked();
-        site.mosque = checkBox_mosque.isChecked();
-        site.monument = checkBox_monument.isChecked();
-        site.zambra = checkBox_zambra.isChecked();
-        site.restaurant = checkBox_restaurant.isChecked();
-        site.fountain = checkBox_fountain.isChecked();
-        site.latitude = latLng.latitude;
-        site.longitude = latLng.longitude;
-
-
-        //Add the site to the database
-        if(newSite) {
-            dbAccess.add(site);
-
-            //Add the new site to "Own Sites" and "Favourite Sites"
-            SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-            SharedPreferences.Editor editor = pref.edit();
-
-            Set<String> setOwn = pref.getStringSet(getString(R.string.own_sites_key), new HashSet<String>());
-            setOwn.add(Integer.toString(site.id));
-            editor.putStringSet(getString(R.string.own_sites_key), setOwn);
-
-            Set<String> setFavourite = pref.getStringSet(getString(R.string.favourite_sites_key), new HashSet<String>());
-            setFavourite.add(Integer.toString(site.id));
-            editor.putStringSet(getString(R.string.favourite_sites_key), setFavourite);
-
-            editor.commit();
-
-            Toast.makeText(this, getString(R.string.toast_addSite_added), Toast.LENGTH_SHORT).show();
-
-        }
-        else {
-            dbAccess.update(site);
-            Toast.makeText(this, getString(R.string.toast_addSite_updated), Toast.LENGTH_SHORT).show();
-        }
-
-
-        //Return to MainActivity
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
     }
 
 }

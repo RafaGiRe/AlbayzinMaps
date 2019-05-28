@@ -16,7 +16,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, View.OnClickListener, GoogleMap.OnMapLongClickListener {
+public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, View.OnClickListener, GoogleMap.OnMapLongClickListener, GoogleMap.OnMapClickListener {
 
     private GoogleMap mMap;
     Bundle bundle;
@@ -74,30 +74,34 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap = googleMap;
 
 
-        // Add a marker in Sydney and move the camera
+        // Add a marker in Albayzin and move the camera
         marker = mMap.addMarker(new MarkerOptions().position(position).title(markerTitle));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(position, 16));
+        //marker.showInfoWindow();
 
         //mMap.setOnMapClickListener();
         //mMap.setOnMapLongClickListener();
         //mMap.setOnMarkerClickListener();
         //mMap.setOnMarkerDragListener();
-        if(!fromSearchActivity)
+        if(!fromSearchActivity) {
             mMap.setOnMapLongClickListener(this);
+            mMap.setOnMapClickListener(this);
+        }
     }
 
     @Override
     public void onClick(View v) {
         if(fromSearchActivity){
-            //Toast.makeText(v.getContext(), "Intent hacia GoogleMaps", Toast.LENGTH_SHORT).show();
-
-            Uri uriIntent = Uri.parse("geo:" + marker.getPosition().latitude + "," + marker.getPosition().longitude + "?q=" + marker.getPosition().latitude + "," + marker.getPosition().longitude + "?z=16");
+            Uri uriIntent = Uri.parse("geo:" + marker.getPosition().latitude + "," + marker.getPosition().longitude + "?q=" + marker.getPosition().latitude + "," + marker.getPosition().longitude + "(" + marker.getTitle() + ")" + "&z=16");
+            // Prefiero no abrir directamente la navegacion hasta el sitio, porque si el usuario no quisiera dar permiso, ya no puede ver el lugar exacto.
+            // Ademas, el mapa cuenta con dos botones para pedir expresamente la navegacion hasta el sitio
+            //Uri uriIntent = Uri.parse("google.navigation:q=" + marker.getPosition().latitude + "," + marker.getPosition().longitude);
             Intent intent = new Intent(Intent.ACTION_VIEW, uriIntent);
             intent.setPackage("com.google.android.apps.maps");
             startActivity(intent);
         }
         else {
-            if (marker != null) {
+            if (!marker.getTitle().equals("Albayzin")) {
                 Intent intent = new Intent(v.getContext(), AddSiteActivity.class);
 
                 Bundle bundle = new Bundle();
@@ -107,6 +111,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                 intent.putExtras(bundle);
                 startActivity(intent);
+
+                finish();
             } else {
                 Toast.makeText(v.getContext(), getString(R.string.toast_map_no_marker), Toast.LENGTH_SHORT).show();
             }
@@ -123,6 +129,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //    .anchor(0.0f, 1.0f)
         //  .position(latLng));
         marker = mMap.addMarker(new MarkerOptions().anchor(0.0f, 1.0f).position(latLng).title(getString(R.string.marker_map)));
+        marker.showInfoWindow();
     }
 
+    @Override
+    public void onMapClick(LatLng latLng) {
+        mMap.clear();
+
+        //mMap.addMarker(new MarkerOptions()
+        //      .icon(BitmapDescriptorFactory.fromResource(R.drawable.marcador))
+        //    .anchor(0.0f, 1.0f)
+        //  .position(latLng));
+        marker = mMap.addMarker(new MarkerOptions().anchor(0.0f, 1.0f).position(latLng).title(getString(R.string.marker_map)));
+        marker.showInfoWindow();
+    }
 }

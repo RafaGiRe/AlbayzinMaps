@@ -83,11 +83,19 @@
             </LinearLayout>
         </LinearLayout>
 
+        <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="?android:attr/listDivider" />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingVertical="8dp"
-            android:paddingTop="24dp"
+            android:layout_marginTop="24dp"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#000000"
             android:text="@string/tView_search_and_or" />
 
         <RadioGroup

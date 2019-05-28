@@ -30,7 +30,7 @@
     <string name="pref_idiom_key">com.rafagire.albayzinmaps.idiom_list</string>
     <string name="pref_idiom_title">Idiom</string>
     <string-array name="pref_idiom_titles">
-        <item>Spanish</item>
+        <item>Español</item>
         <item>English</item>
     </string-array>
     <string-array name="pref_idiom_values">
@@ -42,8 +42,8 @@
     <string name="pref_database_restore_key">com.rafagire.albayzinmaps.restore_database_values</string>
     <string name="pref_database_add_title">Add new entry</string>
     <string name="pref_database_update_title">Actualize entrys</string>
+    <string name="pref_database_remove_title">Remove entrys</string>
     <string name="pref_database_restore_title">Restore database</string>
-    <string name="pref_database_restore_summ">Remove favourite and added sites</string>
 
 
     <!-- _______________________Search Fragment_______________________ -->
@@ -74,10 +74,16 @@
     <!-- _______________________Search Activity_______________________ -->
 
     <string name="title_activity_search">Search</string>
-    <string name="title_activity_search_fromUpdate">All sites</string>
+    <string name="title_activity_search_fromUpdate">Actualize site</string>
+    <string name="title_activity_search_fromRemove">Remove site</string>
     <string name="title_activity_search_fromFav">My Sites</string>
     <string name="title_activity_search_fromPend">Pending Sites</string>
     <string name="tView_search_no_sites">No results available.</string>
+    <string name="dialog_search_title">Remove site</string>
+    <string name="dialog_search_text1">You are going to remove the site</string>
+    <string name="dialog_search_text2">permanently.</string>
+    <string name="dialog_search_positiveButton">OK</string>
+    <string name="dialog_search_negativeButton">Cancel</string>
 
 
     <!-- _______________________ShowSite Activity_______________________ -->
@@ -88,7 +94,7 @@
     <string name="toast_showSite_addPend">Correctly added to Pending Sites</string>
     <string name="button_showSite_showInMap">Show on map</string>
     <string name="button_showSite_visited">Visited!</string>
-    <string name="toast_showSite_addVisited">Correctly added to visited sites</string>
+    <string name="toast_showSite_addVisited">Correctly added to Visited Sites</string>
 
 
     <!-- _______________________Map Activity_______________________ -->
@@ -97,7 +103,7 @@
     <string name="marker_map">New site</string>
     <string name="button_map_select">Select</string>
     <string name="button_map_open_GoogleMaps">Open in GoogleMaps</string>
-    <string name="toast_map_no_marker">Must select a point doing a long click</string>
+    <string name="toast_map_no_marker">Must select a point clicking on the map</string>
 
 
     <!-- _______________________AddSite Activity (also used for Update)_______________________ -->
@@ -118,8 +124,16 @@
     <string name="checkBox_addSite_f7">Fountain</string>
     <string name="button_addSite_add">Add</string>
     <string name="button_addSite_update">Actualize</string>
+    <string name="button_addSite_cancel">Cancel</string>
     <string name="toast_addSite_no_name">Must enter a name</string>
     <string name="toast_addSite_added">Site added correctly</string>
     <string name="toast_addSite_updated">Site actualized correctly</string>
+
+    <!-- _______________________Restore Database Activity_______________________ -->
+    <string name="title_activity_restoreDatabase">Restore database</string>
+    <string name="dialog_title_restoreDatabase">Restore database</string>
+    <string name="dialog_message_restoreDatabase">Are you sure you want to restore the database content?</string>
+    <string name="dialog_positiveButton_restoreDatabase">Yes</string>
+    <string name="dialog_negativeButton_restoreDatabase">Cancel</string>
 
 </resources>

@@ -114,13 +114,31 @@
             </LinearLayout>
         </LinearLayout>
 
-        <Button
-            android:id="@+id/button_addSite"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:padding="16dp"
-            android:text="@string/button_addSite_add" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/button_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginHorizontal="16dp"
+                android:layout_gravity="center"
+                android:padding="16dp"
+                android:text="@string/button_addSite_cancel" />
+            <Button
+                android:id="@+id/button_addSite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginHorizontal="16dp"
+                android:layout_gravity="center"
+                android:padding="16dp"
+                android:text="@string/button_addSite_add" />
+        </LinearLayout>
+
+
 
 
     </LinearLayout>

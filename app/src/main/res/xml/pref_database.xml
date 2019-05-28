@@ -21,10 +21,25 @@
         </intent>
     </Preference>
 
-    <SwitchPreference
-        android:defaultValue="true"
-        android:key="@string/pref_database_restore_key"
-        android:summary="@string/pref_database_restore_summ"
-        android:title="@string/pref_database_restore_title" />
+    <Preference android:title="@string/pref_database_remove_title">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="com.tutorial.rafagire.albayzinmaps"
+            android:targetClass="com.tutorial.rafagire.albayzinmaps.SearchActivity" >
+            <extra
+                android:name="fromRemove"
+                android:value="true" />
+
+        </intent>
+    </Preference>
+
+    <Preference android:title="@string/pref_database_restore_title">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="com.tutorial.rafagire.albayzinmaps"
+            android:targetClass="com.tutorial.rafagire.albayzinmaps.RestoreDatabaseActivity" >
+
+        </intent>
+    </Preference>
 
 </PreferenceScreen>

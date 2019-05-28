@@ -46,7 +46,7 @@
                      android:id="@+id/iButton_showSite_pend"
                      android:layout_width="match_parent"
                      android:layout_height="wrap_content"
-                     app:srcCompat="@drawable/ic_menu_map"/>
+                     app:srcCompat="@drawable/ic_menu_pending"/>
              </LinearLayout>
          </RelativeLayout>
 
@@ -68,19 +68,21 @@
             android:layout_height="wrap_content"
             android:gravity="center">
 
-            <Button
-                android:id="@+id/button_showSite_showInMap"
+            <ImageButton
+                android:id="@+id/iButton_showSite_showInMap"
                 android:padding="16dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/button_showSite_showInMap"/>
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:layout_marginHorizontal="32dp"
+                app:srcCompat="@drawable/ic_menu_map"/>
 
-            <Button
-                android:id="@+id/button_showSite_visited"
+            <ImageButton
+                android:id="@+id/iButton_showSite_visited"
                 android:padding="16dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/button_showSite_visited"/>
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:layout_marginHorizontal="32dp"
+                app:srcCompat="@drawable/ic_check"/>
 
         </LinearLayout>
 

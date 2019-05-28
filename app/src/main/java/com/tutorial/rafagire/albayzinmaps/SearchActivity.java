@@ -2,10 +2,12 @@ package com.tutorial.rafagire.albayzinmaps;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -14,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -27,6 +30,7 @@ public class SearchActivity extends  AppCompatActivity implements AdapterView.On
     DBAccess dbAccess;
     SharedPreferences pref;
     boolean updateSite = false;
+    boolean removeSite = false;
     ItemAdapter itemAdapter;
 
     List<Site> list_sites;
@@ -47,6 +51,7 @@ public class SearchActivity extends  AppCompatActivity implements AdapterView.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        /*
         setContentView(R.layout.activity_search);
 
         dbAccess = new DBLocal(getApplicationContext(), "DB_AM", null, 1);
@@ -54,9 +59,6 @@ public class SearchActivity extends  AppCompatActivity implements AdapterView.On
         pref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
         Bundle bundle = this.getIntent().getExtras();
-
-
-
         if(bundle.getBoolean("fromUpdate")) {
             updateSite = true;
             list_sites = dbAccess.findAll();
@@ -108,28 +110,155 @@ public class SearchActivity extends  AppCompatActivity implements AdapterView.On
             tView_noSites.setText(getString(R.string.tView_search_no_sites));
             tView_noSites.setTextAppearance(this, android.R.style.TextAppearance_DeviceDefault_SearchResult_Subtitle);
             tView_noSites.setGravity(Gravity.CENTER);
+        }*/
+    }
+
+    protected void onResume(){
+        setContentView(R.layout.activity_search);
+
+        dbAccess = new DBLocal(getApplicationContext(), "DB_AM", null, 1);
+        list_sites = new ArrayList<Site>();
+        pref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+
+        Bundle bundle = this.getIntent().getExtras();
+        if(bundle.getBoolean("fromUpdate")) {
+            updateSite = true;
+            list_sites = dbAccess.findAll();
+            setTitle(getString(R.string.title_activity_search_fromUpdate));
+        }
+        else if (bundle.getBoolean("fromRemove")){
+            removeSite = true;
+            list_sites = dbAccess.findAll();
+            setTitle(getString(R.string.title_activity_search_fromRemove));
+        }
+        else if(bundle.getBoolean("fromFavourite")){
+            setTitle(getString(R.string.title_activity_search_fromFav));
+
+            Set<String> set = pref.getStringSet(getString(R.string.favourite_sites_key), new HashSet<String>());
+            if(!set.isEmpty()){
+                for(String id : set){
+                    list_sites.add(dbAccess.findById(Integer.parseInt(id)));
+                }
+            }
+        }
+        else if (bundle.getBoolean("fromPending")){
+            setTitle(getString(R.string.title_activity_search_fromPend));
+
+            Set<String> set = pref.getStringSet(getString(R.string.pending_sites_key), new HashSet<String>());
+            if(!set.isEmpty()){
+                for(String id : set){
+                    list_sites.add(dbAccess.findById(Integer.parseInt(id)));
+                }
+            }
+        }
+        else{
+            filtersIntersection = bundle.getBoolean("filtersIntersection");
+            name = bundle.getString("name");
+            viewpoint = bundle.getBoolean("viewpoint");
+            church = bundle.getBoolean("church");
+            mosque = bundle.getBoolean("mosque");
+            monument = bundle.getBoolean("monument");
+            zambra = bundle.getBoolean("zambra");
+            restaurant = bundle.getBoolean("restaurant");
+            fountain = bundle.getBoolean("fountain");
+
+            list_sites = findFilterSites();
         }
 
+        if((list_sites != null) && (!list_sites.isEmpty())){
+            listView = (ListView) findViewById(R.id.listView_search);
+            itemAdapter = new ItemAdapter(this, list_sites);
+            listView.setAdapter(itemAdapter);
+
+            listView.setOnItemClickListener(this);
+        }
+        else{
+            LinearLayout lLayout = (LinearLayout) findViewById(R.id.lLayout_search);
+            lLayout.removeView(((ListView) findViewById(R.id.listView_search)));
+
+            final TextView tView_noSites = new TextView(this);
+            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+            tView_noSites.setLayoutParams(lp);
+            tView_noSites.setText(getString(R.string.tView_search_no_sites));
+            tView_noSites.setTextAppearance(this, android.R.style.TextAppearance_Large);
+            tView_noSites.setGravity(Gravity.CENTER);
+
+            lLayout.addView(tView_noSites);
+        }
+        super.onResume();
     }
 
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             final int pos = position;
-            Site s = (Site)itemAdapter.getItem(position);
+            final Site s = (Site)itemAdapter.getItem(position);
 
-            Intent intent;
+            if(removeSite){
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+                alertDialog.setTitle(getString(R.string.dialog_search_title));
+                alertDialog.setMessage(getString(R.string.dialog_search_text1) + " \"" + s.name + "\" " + getString(R.string.dialog_search_text2));
 
-            if(updateSite) {
-                intent = new Intent(this, AddSiteActivity.class);
+                alertDialog.setPositiveButton(getString(R.string.dialog_search_positiveButton),
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                                SharedPreferences.Editor editor = pref.edit();
+
+                                Set<String> set;
+
+                                set = pref.getStringSet(getString(R.string.favourite_sites_key), new HashSet<String>());
+                                if(set.contains(Integer.toString(s.id))){
+                                    set.remove(Integer.toString(s.id));
+                                    editor.putStringSet(getString(R.string.favourite_sites_key), set);
+                                    editor.commit();
+                                }
+                                set = pref.getStringSet(getString(R.string.pending_sites_key), new HashSet<String>());
+                                if(set.contains(Integer.toString(s.id))){
+                                    set.remove(Integer.toString(s.id));
+                                    editor.putStringSet(getString(R.string.pending_sites_key), set);
+                                    editor.commit();
+                                }
+                                set = pref.getStringSet(getString(R.string.own_sites_key), new HashSet<String>());
+                                if(set.contains(Integer.toString(s.id))){
+                                    set.remove(Integer.toString(s.id));
+                                    editor.putStringSet(getString(R.string.own_sites_key), set);
+                                    editor.commit();
+                                }
+                                set = pref.getStringSet(getString(R.string.visited_sites_key), new HashSet<String>());
+                                if(set.contains(Integer.toString(s.id))){
+                                    set.remove(Integer.toString(s.id));
+                                    editor.putStringSet(getString(R.string.visited_sites_key), set);
+                                    editor.commit();
+                                }
+                                dbAccess.remove(s.id);
+
+                                //finish();
+                                recreate();
+                            }
+                        });
+
+                alertDialog.setNegativeButton(getString(R.string.dialog_search_negativeButton),
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        });
+
+                alertDialog.show();
             }
             else{
-                intent = new Intent(this, ShowSiteActivity.class);
+                Intent intent;
+                if(updateSite) {
+                    intent = new Intent(this, AddSiteActivity.class);
+                }
+                else{
+                    intent = new Intent(this, ShowSiteActivity.class);
+                }
+                Bundle bundle = new Bundle();
+                bundle.putInt("id", s.id);
+
+                intent.putExtras(bundle);
+                startActivity(intent);
             }
-
-            Bundle bundle = new Bundle();
-            bundle.putInt("id", s.id);
-
-            intent.putExtras(bundle);
-            startActivity(intent);
         }
 
 
@@ -318,10 +447,10 @@ public class SearchActivity extends  AppCompatActivity implements AdapterView.On
 
             set = pref.getStringSet(getString(R.string.pending_sites_key), new HashSet<String>());
             if(set.contains(Integer.toString(site.id))){
-                iView_pend.setImageDrawable(getDrawable(R.drawable.ic_map_selected));
+                iView_pend.setImageDrawable(getDrawable(R.drawable.ic_pending_selected));
             }
             else{
-                iView_pend.setImageDrawable(getDrawable(R.drawable.ic_menu_map));
+                iView_pend.setImageDrawable(getDrawable(R.drawable.ic_menu_pending));
             }
 
 

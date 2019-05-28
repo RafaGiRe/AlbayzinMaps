@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,8 +24,8 @@ public class ShowSiteActivity extends AppCompatActivity implements View.OnClickL
     TextView tView_description;
     ImageButton iButton_fav;
     ImageButton iButton_pend;
-    Button button_showInMap;
-    Button button_visited;
+    ImageButton iButton_showInMap;
+    ImageButton iButton_visited;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,8 +44,8 @@ public class ShowSiteActivity extends AppCompatActivity implements View.OnClickL
         tView_description = (TextView)findViewById(R.id.tView_showSite_description);
         iButton_fav = (ImageButton)findViewById(R.id.iButton_showSite_fav);
         iButton_pend = (ImageButton)findViewById(R.id.iButton_showSite_pend);
-        button_showInMap = (Button)findViewById(R.id.button_showSite_showInMap);
-        button_visited = (Button)findViewById(R.id.button_showSite_visited);
+        iButton_showInMap = (ImageButton)findViewById(R.id.iButton_showSite_showInMap);
+        iButton_visited = (ImageButton)findViewById(R.id.iButton_showSite_visited);
 
         tView_name.setText(site.name);
         if((site.description != null) && (!site.description.equals("")))
@@ -111,13 +110,17 @@ public class ShowSiteActivity extends AppCompatActivity implements View.OnClickL
         }
         set = pref.getStringSet(getString(R.string.pending_sites_key), new HashSet<String>());
         if(set.contains(Integer.toString(site.id))){
-            iButton_pend.setImageDrawable(getDrawable(R.drawable.ic_map_selected));
+            iButton_pend.setImageDrawable(getDrawable(R.drawable.ic_pending_selected));
+        }
+        set = pref.getStringSet(getString(R.string.visited_sites_key), new HashSet<String>());
+        if(set.contains(Integer.toString(site.id))){
+            iButton_visited.setImageDrawable(getDrawable(R.drawable.ic_check_selected));
         }
 
         iButton_fav.setOnClickListener(this);
         iButton_pend.setOnClickListener(this);
-        button_showInMap.setOnClickListener(this);
-        button_visited.setOnClickListener(this);
+        iButton_showInMap.setOnClickListener(this);
+        iButton_visited.setOnClickListener(this);
     }
 
     @Override
@@ -144,16 +147,16 @@ public class ShowSiteActivity extends AppCompatActivity implements View.OnClickL
                 if(set.contains(Integer.toString(site.id))){
                     set.remove(Integer.toString(site.id));
                     editor.putStringSet(getString(R.string.pending_sites_key), set);
-                    iButton_pend.setImageDrawable(getDrawable(R.drawable.ic_menu_map));
+                    iButton_pend.setImageDrawable(getDrawable(R.drawable.ic_menu_pending));
                 }
                 else{
                     set.add(Integer.toString(site.id));
                     editor.putStringSet(getString(R.string.pending_sites_key), set);
-                    iButton_pend.setImageDrawable(getDrawable(R.drawable.ic_map_selected));
+                    iButton_pend.setImageDrawable(getDrawable(R.drawable.ic_pending_selected));
                     Toast.makeText(v.getContext(), getString(R.string.toast_showSite_addPend), Toast.LENGTH_SHORT).show();
                 }
                 break;
-            case(R.id.button_showSite_showInMap):
+            case(R.id.iButton_showSite_showInMap):
                 Intent intent = new Intent(this, MapsActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putString("markerTitle", site.name);
@@ -163,10 +166,11 @@ public class ShowSiteActivity extends AppCompatActivity implements View.OnClickL
                 intent.putExtras(bundle);
                 startActivity(intent);
                 break;
-            case(R.id.button_showSite_visited):
+            case(R.id.iButton_showSite_visited):
                 set = pref.getStringSet(getString(R.string.visited_sites_key), new HashSet<String>());
                 set.add(Integer.toString(site.id));
                 editor.putStringSet(getString(R.string.visited_sites_key), set);
+                iButton_visited.setImageDrawable(getDrawable(R.drawable.ic_check_selected));
                 Toast.makeText(v.getContext(), getString(R.string.toast_showSite_addVisited), Toast.LENGTH_SHORT).show();
                 break;
         }

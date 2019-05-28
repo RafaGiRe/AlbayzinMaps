@@ -59,6 +59,13 @@ public class MainActivity
     }
 
     @Override
+    protected void onResume() {
+        checkSharedPreferences();
+
+        super.onResume();
+    }
+
+    @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
@@ -87,12 +94,6 @@ public class MainActivity
             //Creamos el Intent
             Intent intent = new Intent(MainActivity.this, Settings.class);
 
-            //Creamos con el Bundle la información a pasar entre actividades
-            //Bundle b = new Bundle();
-            //b.putString("NOMBRE", texto.getText().toString());
-
-            //Metemos el Bundle en el Intent y lanzamos el intent
-            //intent.putExtras(b);
             startActivity(intent);
             return true;
         }
@@ -100,10 +101,60 @@ public class MainActivity
         return super.onOptionsItemSelected(item);
     }
 
+    @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    protected void onResume() {
-        //Check keys of SharedPreferences
+    public boolean onNavigationItemSelected(MenuItem item) {
+        // Handle navigation view item clicks here.
+        int id = item.getItemId();
 
+        boolean FragmentTransaction = false;
+        Fragment frag = null;
+
+        if (id == R.id.nav_search) {
+            frag = new SearchFragment();
+            FragmentTransaction = true;
+        } else if (id == R.id.nav_map) {
+            item.setChecked(false);
+
+            Intent intent = new Intent(this, SearchActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putBoolean("fromPending", true);
+            intent.putExtras(bundle);
+            startActivity(intent);
+        } else if (id == R.id.nav_favourites) {
+            item.setChecked(false);
+
+            Intent intent = new Intent(this, SearchActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putBoolean("fromFavourite", true);
+            intent.putExtras(bundle);
+            startActivity(intent);
+        } else if (id == R.id.nav_profile) {
+            frag = new ProfileFragment();
+            FragmentTransaction = true;
+        }
+
+        if(FragmentTransaction){
+            getSupportFragmentManager().beginTransaction().replace(R.id.content_main, frag).commit();
+
+            item.setChecked(true);
+            getSupportActionBar().setTitle(item.getTitle());
+        }
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
+    }
+
+
+
+    private void checkSharedPreferences(){
+        //Check keys of SharedPreferences
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = pref.edit();
 
@@ -185,58 +236,6 @@ public class MainActivity
             editor.putBoolean(getString(R.string.first_access_key), false);
             editor.commit();
         }
-
-        super.onResume();
     }
 
-
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-
-        boolean FragmentTransaction = false;
-        Fragment frag = null;
-
-        if (id == R.id.nav_search) {
-            frag = new SearchFragment();
-            FragmentTransaction = true;
-        } else if (id == R.id.nav_map) {
-            item.setChecked(false);
-
-            Intent intent = new Intent(this, SearchActivity.class);
-            Bundle bundle = new Bundle();
-            bundle.putBoolean("fromPending", true);
-            intent.putExtras(bundle);
-            startActivity(intent);
-        } else if (id == R.id.nav_favourites) {
-            item.setChecked(false);
-
-            Intent intent = new Intent(this, SearchActivity.class);
-            Bundle bundle = new Bundle();
-            bundle.putBoolean("fromFavourite", true);
-            intent.putExtras(bundle);
-            startActivity(intent);
-        } else if (id == R.id.nav_profile) {
-            frag = new ProfileFragment();
-            FragmentTransaction = true;
-        }
-
-        if(FragmentTransaction){
-            getSupportFragmentManager().beginTransaction().replace(R.id.content_main, frag).commit();
-
-            item.setChecked(true);
-            getSupportActionBar().setTitle(item.getTitle());
-        }
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
-    }
-
-    @Override
-    public void onFragmentInteraction(Uri uri) {
-
-    }
 }

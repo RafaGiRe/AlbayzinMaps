@@ -30,7 +30,7 @@
     <string name="pref_idiom_key">com.rafagire.albayzinmaps.idiom_list</string>
     <string name="pref_idiom_title">Idioma</string>
     <string-array name="pref_idiom_titles">
-        <item>Spanish</item>
+        <item>Español</item>
         <item>English</item>
     </string-array>
     <string-array name="pref_idiom_values">
@@ -42,9 +42,8 @@
     <string name="pref_database_restore_key">com.rafagire.albayzinmaps.restore_database_values</string>
     <string name="pref_database_add_title">Añadir nueva entrada</string>
     <string name="pref_database_update_title">Actualizar entradas manualmente</string>
+    <string name="pref_database_remove_title">Eliminar entradas manualmente</string>
     <string name="pref_database_restore_title">Restaurar base de datos</string>
-    <string name="pref_database_restore_summ">Elimina los sitios favoritos y añadidos</string>
-
 
     <!-- _______________________Search Fragment_______________________ -->
 
@@ -74,10 +73,16 @@
     <!-- _______________________Search Activity_______________________ -->
 
     <string name="title_activity_search">Búsqueda</string>
-    <string name="title_activity_search_fromUpdate">Todos los sitios</string>
+    <string name="title_activity_search_fromUpdate">Actualizar sitio</string>
+    <string name="title_activity_search_fromRemove">Eliminar sitio</string>
     <string name="title_activity_search_fromFav">Mis Sitios</string>
     <string name="title_activity_search_fromPend">Sitios Pendientes</string>
     <string name="tView_search_no_sites">Ningún resultado disponible.</string>
+    <string name="dialog_search_title">Eliminar sitio</string>
+    <string name="dialog_search_text1">Va a eliminar permanentemente el sitio</string>
+    <string name="dialog_search_text2">de la base de datos.</string>
+    <string name="dialog_search_positiveButton">Quiero hacerlo</string>
+    <string name="dialog_search_negativeButton">Cancelar</string>
 
 
     <!-- _______________________ShowSite Activity_______________________ -->
@@ -88,7 +93,7 @@
     <string name="toast_showSite_addPend">Añadido correctamente a Sitios Pendientes</string>
     <string name="button_showSite_showInMap">Mostrar en mapa</string>
     <string name="button_showSite_visited">¡Visitado!</string>
-    <string name="toast_showSite_addVisited">Añadido correctamente a visitados</string>
+    <string name="toast_showSite_addVisited">Añadido correctamente a Visitados</string>
 
 
     <!-- _______________________Map Activity_______________________ -->
@@ -97,7 +102,7 @@
     <string name="marker_map">Nuevo sitio</string>
     <string name="button_map_select">Seleccionar</string>
     <string name="button_map_open_GoogleMaps">Abrir en GoogleMaps</string>
-    <string name="toast_map_no_marker">Debe seleccionar un punto haciendo un click largo</string>
+    <string name="toast_map_no_marker">Debe seleccionar un punto pulsando sobre el mapa</string>
 
 
     <!-- _______________________AddSite Activity (also used for Update)_______________________ -->
@@ -118,8 +123,16 @@
     <string name="checkBox_addSite_f7">Fuente</string>
     <string name="button_addSite_add">Añadir</string>
     <string name="button_addSite_update">Actualizar</string>
+    <string name="button_addSite_cancel">Cancelar</string>
     <string name="toast_addSite_no_name">Debe introducir un nombre</string>
     <string name="toast_addSite_added">Sitio añadido correctamente</string>
     <string name="toast_addSite_updated">Sitio actualizado correctamente</string>
+
+    <!-- _______________________Restore Database Activity_______________________ -->
+    <string name="title_activity_restoreDatabase">Restaurar base de datos</string>
+    <string name="dialog_title_restoreDatabase">Restaurar base de datos</string>
+    <string name="dialog_message_restoreDatabase">¿Está seguro de que desea restaurar el contenido de la base de datos?</string>
+    <string name="dialog_positiveButton_restoreDatabase">Sí</string>
+    <string name="dialog_negativeButton_restoreDatabase">Cancelar</string>
 
 </resources>
